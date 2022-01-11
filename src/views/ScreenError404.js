@@ -1,3 +1,7 @@
-
-
-export default function ScreenTask() {}
+export default function ScreenError404() {
+    return (
+        <div>
+            
+        </div>
+    )
+}

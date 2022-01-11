@@ -6,39 +6,18 @@
   background: url("../assets/img/background.png") no-repeat top left;
   background-size: cover;
   background-color: #d6ccce;
-}
-
-.btn {
-  background: linear-gradient(#ef9196, #dd4930 48%, #bd2414 52%, var(--color_1));
-  border-radius: var(--mainBorderRadius);
-  box-shadow: var(--btnShadow);
-  position: absolute;
-  height: 70px;
-  width: 350px;
-  top: calc(100vh/2 - 35px);
-  right: 8vw;
   display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: none;
+  justify-content: flex-end;
 }
 
-.btn:active {
-  top: calc(100vh/2 - 33px);
-  right: calc(8vw - 3px);
-  box-shadow: 0 0 0 60px rgba(0, 0, 0, .05) inset;
-  opacity: 0.9;
-}
-
-.img {
-  padding: 0 10px;
-  max-height: 50px;
-}
-
-.text {
-  width: 100%;
-  align-self: center;
-  font-size: 1.5em;
-  text-shadow: 0 -1px 1px #777;
-  font-weight: 500;
+.sticker {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin-right: 6vw;
+  top: calc(100vh/2 - 200px);
+  display: flex;
+  justify-content: center;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  background: linear-gradient(180deg, #BCB080 5%, #EFE5C0 20%, #EFEAD8 75%);
 }

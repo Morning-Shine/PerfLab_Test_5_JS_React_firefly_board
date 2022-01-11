@@ -1,13 +1,15 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "../views/routs";
-import ScreenDashboard from "../views/ScreenDashboard";
-import ScreenAuthorization from "../views/ScreenAuthorization";
 import { DASHBOARD, LOGIN_ROUTE } from "../utils/constants";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useSelector } from "react-redux";
+
+
 
 export default function AppRouter() {
-  //переделать на роутер-дом версии 6, проверить рендер компонентов и exact
-  const user = false;
+  const user = useSelector(state => state.user.id);
+  // console.log(user);
   return user ? (
     <Routes>
       {privateRoutes.map(({ path, element }) => (
