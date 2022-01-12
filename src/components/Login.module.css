@@ -5,7 +5,7 @@
   height: 100vh;
   background: url("../assets/img/background.png") no-repeat top left;
   background-size: cover;
-  background-color: #d6ccce;
+  /* background-color: #d6ccce; */
   display: flex;
   justify-content: flex-end;
 }
@@ -18,6 +18,6 @@
   top: calc(100vh/2 - 200px);
   display: flex;
   justify-content: center;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  background: linear-gradient(180deg, #BCB080 5%, #EFE5C0 20%, #EFEAD8 75%);
+  /* box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  background: linear-gradient(180deg, #BCB080 5%, #EFE5C0 20%, #EFEAD8 75%); */
 }
