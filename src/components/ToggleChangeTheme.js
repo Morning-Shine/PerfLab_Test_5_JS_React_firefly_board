@@ -6,11 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../store/themeSlice";
 
-//TODO функция на переключение темы, функция на блокировку нажатия кнопки
+
 export default function ToggleChangeTheme() {
   const dispatch = useDispatch();
   const btnState = useSelector(state => state.theme.blockedBtn);
-  console.log(btnState);
+
   let blockedMoon;
   let BlockedSun;
 
@@ -50,10 +50,10 @@ export default function ToggleChangeTheme() {
         bgcolor: "background.default",
         color: "text.primary",
         borderRadius: 1,
+        //  border: "green solid 1px",
       }}
-    >
+      >
       <IconButton
-        sx={{ ml: 1 }}
         onClick={turnOnMoon}
         color="inherit"
         disabled={blockedMoon}

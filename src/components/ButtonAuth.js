@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 
 
+
 export default function ButtonAuth() {
   const dispatch = useDispatch();
 
@@ -30,9 +31,9 @@ export default function ButtonAuth() {
   };
 
   return (
-      <button className={styles.btn} onClick={handleLogin}>
-        <img className={styles.img} src={google_logo} alt="google_logo" />
-        <p className={styles.text}>Войти с помощью Google</p>
-      </button>
+    <button className={styles.btn} onClick={handleLogin}>
+      <img className={styles.img} src={google_logo} alt="google_logo" />
+      <p className={styles.text}>Войти с помощью Google</p>
+    </button>
   );
 }

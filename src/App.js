@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import AppRouter from "./components/AppRouter";
 import Loader from "./components/Loader";
