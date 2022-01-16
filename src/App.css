@@ -5,6 +5,10 @@
   font-family: 'Mulish', sans-serif;
 }
 
+body {
+  min-width: 900px;
+}
+
 .AppLoader {
   display: flex;
   align-items: center;

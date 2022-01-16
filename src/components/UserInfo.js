@@ -10,7 +10,7 @@ export default function UserInfo({ user }) {
       <Divider orientation="vertical" variant="middle" flexItem />
       <P>
         {user.name}
-        {/*очень длинное-предлинное имя, прямо нереально длиннючее вот вообще*/}
+        {/* очень длинное-предлинное имя, прямо нереально длиннючее вот вообще */}
       </P>
       <AvatarContainer>
         <Avatar
@@ -22,7 +22,7 @@ export default function UserInfo({ user }) {
     </Div>
   );
 }
-//TODO стили для панельки с пользователем. Далее боковая панель и создание тикета
+
 const AvatarContainer = styled.div`
   position: relative;
   right: 0;
@@ -33,8 +33,9 @@ const AvatarContainer = styled.div`
 `;
 
 const P = styled.p`
-  font-family: "Mulish", sans-serif;
+  font-family: "Mulish";
   font-size: 14px;
+  font-weight: 600;
   padding: 0 5px;
   text-align: end;
 `;

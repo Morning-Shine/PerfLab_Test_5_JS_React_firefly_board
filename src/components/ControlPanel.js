@@ -8,8 +8,9 @@ import styled from "@emotion/styled";
 
 export default function ControlPanel() {
   const userData = useSelector(state => state.user);
+  
   let render;
-  userData
+  userData.id
     ? (render = (
         <>
           <ToggleChangeTheme />
@@ -22,6 +23,8 @@ export default function ControlPanel() {
 }
 
 const Div = styled.div`
+  // border: 1px solid red;
+
   position: absolute;
   right: 33px;
   top: 0;
