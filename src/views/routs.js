@@ -3,11 +3,14 @@ import {
   DASHBOARD,
   TICKETS,
   CURRENT_TASK,
+  NEW_TASK,
 } from "../utils/constants";
 import ScreenAuthorization from "./ScreenAuthorization";
 import ScreenDashboard from "./ScreenDashboard";
 import ScreenTickets from "./ScreenTickets";
 import ScreenTask from "./ScreenTask";
+import ScreenNewTask from "./ScreenNewTask";
+
 // import Login from "../components/Login";
 
 export const publicRoutes = [
@@ -29,5 +32,9 @@ export const privateRoutes = [
   {
     path: CURRENT_TASK,
     element: <ScreenTask />,
+  },
+  {
+    path: NEW_TASK,
+    element: <ScreenNewTask />,
   },
 ];

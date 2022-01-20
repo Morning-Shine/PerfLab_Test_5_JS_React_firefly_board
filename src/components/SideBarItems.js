@@ -35,7 +35,7 @@ export default function SideBarItems() {
   menuItems.forEach(
     item => (item.isActivePath = item.routing == window.location.pathname)
   );
-//   console.log(menuItems);
+
   return (
       <List>
         {menuItems.map(li => (

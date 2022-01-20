@@ -1,6 +1,5 @@
 import React from "react";
 import ToggleChangeTheme from "./ToggleChangeTheme";
-// import styles from "./ControlPanel.module.css";
 import { useSelector } from "react-redux";
 import UserInfo from "./UserInfo";
 import styled from "@emotion/styled";

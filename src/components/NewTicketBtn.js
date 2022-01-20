@@ -1,32 +1,32 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
 import { CURRENT_TASK } from "../utils/constants";
 
 export default function NewTicketBtn() {
   return (
     <nav>
-      <Link to={CURRENT_TASK}>
-        <Button
+      <Link to={`/tickets/new`}>
+        <StyledButton
           variant="contained"
-          sx={{
-            textTransform: "none",
-            height: "40px",
-            width: "117px",
-            fontSize: "14px",
-            fontWeight: 600,
-            fontFamily: "Mulish",
-            lineHeight: "24px",
-            position: "absolute",
-            top: "27px",
-            left: "146px",
-          }}
         >
           New Ticket
-        </Button>
+        </StyledButton>
       </Link>
     </nav>
   );
 }
 
-function createNewTask() {}
+const StyledButton = styled(Button)`
+  text-transform: none;
+  height: 40px;
+  width: 117px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: Mulish;
+  line-height: 24px;
+  position: absolute;
+  top: 27px;
+  left: 146px;
+`;
