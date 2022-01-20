@@ -26,10 +26,8 @@ const StyledButton = styled(Button)`
   position: absolute;
   left: 612px;
   top: 269px;
-
   height: 40px;
   width: 124px;
-  /* margin-top: 30px; */
   text-transform: none;
   background-color: #eb6e6e;
   font-weight: 600;

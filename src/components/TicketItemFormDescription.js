@@ -22,15 +22,6 @@ export default function TicketItemFormDescription({ control, name }) {
         />
       )}
     />
-    // <Div>
-    //   <StyledTextField
-    //     // required
-    //     id="textFieldDescription"
-    //     label="Description"
-    //     onChange={debounce(e => setCurrentValue(e.target.value), 500)}
-    //     onBlur={() => props.setDescriptionValue(currentValue)}
-    //   />
-    // </Div>
   );
 }
 
@@ -40,11 +31,4 @@ const StyledTextField = styled(TextField)`
   left: 32px;
   height: 56px;
   width: 704px;
-`;
-
-const Div = styled.div`
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 4;
 `;

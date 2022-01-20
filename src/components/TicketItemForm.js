@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
+import React from "react";
 import FormHelperText from "@mui/material/FormHelperText";
-import styled from "@emotion/styled";
-import { useController, useForm, Controller } from "react-hook-form";
-import { drawerWidth } from "./SideBar";
+import { Navigate } from "react-router-dom";
+import { Guid } from "js-guid";
+import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { writeNewTicket } from "../firebaseApp";
+import Notify, { notifySuccess, notifyError, notifyLoading } from "./Notify";
 import TicketItemFormTitle from "./TicketItemFormTitle";
 import TicketItemFormSelect from "./TicketItemFormSelect";
 import TicketItemFormDescription from "./TicketItemFormDescription";
 import TicketItemFormBtn1 from "./TicketItemFormBtn1";
 import TicketItemFormBtn2 from "./TicketItemFormBtn2";
 import TicketItemFormBtn3 from "./TicketItemFormBtn3";
-import { useSelector } from "react-redux";
-import { writeNewTicket } from "../firebaseApp";
-import { Guid } from "js-guid";
-import { Link } from "react-router-dom";
+import { drawerWidth } from "./SideBar";
+import toast from "react-hot-toast";
+import styled from "@emotion/styled";
 
+export default function TicketItemForm({ renderCondition }) {
+  console.log("renderCondition", renderCondition);
 
-export default function TicketItemForm({renderCondition}) {
-  console.log("renderCondition", renderCondition); 
-
-  if (!renderCondition) return  <Link to={`/tickets`}></Link>//возвращать обратно
+  if (!renderCondition) return <Navigate to={"/tickets"} />;
 
   const userData = useSelector(state => state.user);
   // console.log(userData);
@@ -36,30 +36,33 @@ export default function TicketItemForm({renderCondition}) {
   const taskId = Guid.newGuid().StringGuid.replaceAll("-", "");
 
   const onSubmit = async data => {
-    await writeNewTicket(
-      userData.id,
-      userData.name,
-      userData.avatar,
-      data.ticketTitle,
-      data.selectPriority,
-      data.description,
-      taskId,
-      new Date().getTime(),
-      true
-    );
-    //catch!
+    const loadingToast = notifyLoading();
+    try {
+      // throw new Error();
+      await writeNewTicket(
+        userData.id,
+        userData.name,
+        userData.avatar,
+        data.ticketTitle,
+        data.selectPriority,
+        data.description,
+        taskId,
+        new Date().getTime(),
+        true
+      );
+    } catch {//TODO жду ответ от Александра
+      toast.dismiss(loadingToast);
+      notifyError();
+      return
+    }
+    toast.dismiss(loadingToast);
+    notifySuccess();
     reset();
   };
 
-  // console.log(window.location.pathname);
-
-  // const renderCondition =
-  //   window.location.pathname == "/tickets/new"
-  //     ? "newTask"
-  //     : window.location.pathname.slice(9);
-
   return (
     <DivCont>
+      <Notify />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Label>
           {renderCondition == "new" ? "New task" : `Task №${renderCondition}`}
@@ -88,6 +91,7 @@ export default function TicketItemForm({renderCondition}) {
           {errors.description?.message}
         </FormHelperText3>
         <TicketItemFormBtn1 type="submit" isValid={isValid} />
+        <TicketItemFormBtn2 renderCondition={renderCondition} />
         <TicketItemFormBtn3 renderCondition={renderCondition} />
       </Form>
     </DivCont>

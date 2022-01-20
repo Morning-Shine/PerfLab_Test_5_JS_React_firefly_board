@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 export default function ScreenNewTask() {
   // console.log("useParams", useParams());
-  const { taskId } = useParams();
+  // const { taskId } = useParams();
   return (
     <DivCont>
       <SideBar />

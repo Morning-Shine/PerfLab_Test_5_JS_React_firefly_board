@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
-
+import Logout from "./Logout";
 
 export default function UserInfo({ user }) {
+  const [visibleLogout, setVisibleLogout] = useState(true);
   return (
     <Div>
       <Divider orientation="vertical" variant="middle" flexItem />
@@ -12,13 +13,14 @@ export default function UserInfo({ user }) {
         {user.name}
         {/* очень длинное-предлинное имя, прямо нереально длиннючее вот вообще */}
       </P>
-      <AvatarContainer>
+      <AvatarContainer onClick={() => setVisibleLogout(!visibleLogout)}>
         <Avatar
           alt={user.name}
           src={user.avatar}
           sx={{ width: 40, height: 40 }}
         />
       </AvatarContainer>
+      <Logout visibleLogout={visibleLogout} />
     </Div>
   );
 }
@@ -30,6 +32,7 @@ const AvatarContainer = styled.div`
   border-radius: 50%;
   padding: 2.5px;
   justify-self: end;
+  cursor: pointer;
 `;
 
 const P = styled.p`
