@@ -6,7 +6,7 @@ import TicketItemForm from "../components/TicketItemForm";
 import { useParams } from "react-router-dom";
 
 
-export default function ScreenTask() {
+export default function ScreenNewTask() {
   // console.log("useParams", useParams());
   const { taskId } = useParams();
   return (
@@ -14,7 +14,7 @@ export default function ScreenTask() {
       <SideBar />
       <Div>
         <ControlPanel />
-        <TicketItemForm />
+        <TicketItemForm renderCondition={"new"}/>
       </Div>
     </DivCont>
   );
