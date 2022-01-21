@@ -5,7 +5,7 @@ import { Guid } from "js-guid";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { writeNewTicket } from "../firebaseApp";
-import Notify, { notifySuccess, notifyError, notifyLoading } from "./Notify";
+import Notify from "./Notify";
 import TicketItemFormTitle from "./TicketItemFormTitle";
 import TicketItemFormSelect from "./TicketItemFormSelect";
 import TicketItemFormDescription from "./TicketItemFormDescription";
@@ -17,14 +17,12 @@ import toast from "react-hot-toast";
 import styled from "@emotion/styled";
 
 export default function TicketItemForm({ renderCondition }) {
-  console.log("renderCondition", renderCondition);
-
+  //  console.log("renderCondition", renderCondition);
   if (!renderCondition) return <Navigate to={"/tickets"} />;
 
   const userData = useSelector(state => state.user);
-  // console.log(userData);
+
   const {
-    // register,
     handleSubmit,
     control,
     reset,
@@ -36,7 +34,10 @@ export default function TicketItemForm({ renderCondition }) {
   const taskId = Guid.newGuid().StringGuid.replaceAll("-", "");
 
   const onSubmit = async data => {
-    const loadingToast = notifyLoading();
+    const loadingToast = toast.loading(
+      "Создание заявки..."
+    );
+    console.log("1)loadingToast", loadingToast);
     try {
       // throw new Error();
       await writeNewTicket(
@@ -50,13 +51,15 @@ export default function TicketItemForm({ renderCondition }) {
         new Date().getTime(),
         true
       );
-    } catch {//TODO жду ответ от Александра
-      toast.dismiss(loadingToast);
-      notifyError();
-      return
+    } catch {
+      console.log("2)loadingToast error", loadingToast);
+      setTimeout(()=> toast.remove(loadingToast), 1000);
+      toast.error("Ошибка создания заявки");
+      return;
     }
-    toast.dismiss(loadingToast);
-    notifySuccess();
+    console.log("3)loadingToast success", loadingToast);
+    toast.remove(loadingToast);
+    toast.success("Заявка успешно создана");
     reset();
   };
 

@@ -2,19 +2,6 @@ import React from "react";
 import toast, { Toaster, ToastBar } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-export function notifySuccess() {
-  toast.success("Заявка успешно создана");
-}
-
-export function notifyError() {
-  toast.error("Ошибка создания заявки");
-}
-
-export function notifyLoading() {
-  toast.loading("Создание заявки...");
-}
-
-
 export default function Notify() {
   const themeProp = useSelector(state => state.theme.currentTheme);
 
