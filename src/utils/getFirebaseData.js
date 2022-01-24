@@ -1,6 +1,15 @@
-import { ref, getDatabase } from "firebase/database";
-import { useList } from "react-firebase-hooks/database";
+//  import { getDatabase, ref, child, get } from "firebase/database";
 
-const database = getDatabase(firebaseApp);
-
-const [snapshots, loading, error] = useList(ref(database, "list"));
+// //запросить всю БД
+// const dbRef = ref(getDatabase());
+// get(child(dbRef, `tickets`))
+//   .then(snapshot => {
+//     if (snapshot.exists()) {
+//       console.log(snapshot.val());
+//     } else {
+//       console.log("No data available");
+//     }
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });

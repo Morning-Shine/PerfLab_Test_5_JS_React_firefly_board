@@ -50,7 +50,6 @@ export default function ToggleChangeTheme() {
         bgcolor: "background.default",
         color: "text.primary",
         borderRadius: 1,
-        //  border: "green solid 1px",
       }}
       >
       <IconButton

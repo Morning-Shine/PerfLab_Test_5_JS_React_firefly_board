@@ -16,7 +16,6 @@ export async function writeNewTicket(
   date,
   isOpen
 ) {
-  
   const db = getDatabase();
   await set(ref(db, "tickets/" + taskId), {
     user: { userId, userName, userAvatar },

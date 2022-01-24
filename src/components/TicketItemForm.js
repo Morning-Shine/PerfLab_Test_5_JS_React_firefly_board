@@ -34,10 +34,8 @@ export default function TicketItemForm({ renderCondition }) {
   const taskId = Guid.newGuid().StringGuid.replaceAll("-", "");
 
   const onSubmit = async data => {
-    const loadingToast = toast.loading(
-      "Создание заявки..."
-    );
-    console.log("1)loadingToast", loadingToast);
+    const loadingToast = toast.loading("Создание заявки...");
+    //  console.log("1)loadingToast", loadingToast);
     try {
       // throw new Error();
       await writeNewTicket(
@@ -52,12 +50,12 @@ export default function TicketItemForm({ renderCondition }) {
         true
       );
     } catch {
-      console.log("2)loadingToast error", loadingToast);
-      setTimeout(()=> toast.remove(loadingToast), 1000);
+      //   console.log("2)loadingToast error", loadingToast);
+      setTimeout(() => toast.remove(loadingToast), 1000);
       toast.error("Ошибка создания заявки");
       return;
     }
-    console.log("3)loadingToast success", loadingToast);
+    //  console.log("3)loadingToast success", loadingToast);
     toast.remove(loadingToast);
     toast.success("Заявка успешно создана");
     reset();

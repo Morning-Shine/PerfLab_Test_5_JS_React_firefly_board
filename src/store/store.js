@@ -12,19 +12,22 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import loadingSlice from "./loadingSlice";
+import tableViewSlice from "./tableViewSlice";
 import themeSlice from "./themeSlice";
 import userSlice from "./userSlice";
+
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "theme"],
+  whitelist: ["user", "theme", "tableView"],
 };
 
 const rootReducer = combineReducers({
   user: userSlice,
   loading: loadingSlice,
   theme: themeSlice,
+  tableView: tableViewSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
