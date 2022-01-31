@@ -18,7 +18,6 @@ export default function SideBar() {
     <Div>
       <Drawer
         sx={{
-          fontFamily: "Mulish",
           width: drawerWidth,
           // backgroundColor: "#363740",
           flexShrink: 0,

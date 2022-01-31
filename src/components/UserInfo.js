@@ -36,7 +36,6 @@ const AvatarContainer = styled.div`
 `;
 
 const P = styled.p`
-  font-family: "Mulish";
   font-size: 14px;
   font-weight: 600;
   padding: 0 5px;

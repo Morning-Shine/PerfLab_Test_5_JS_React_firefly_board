@@ -10,7 +10,7 @@ export async function writeNewTicket(
   userName,
   userAvatar,
   title,
-  select,
+  priority,
   decr,
   taskId,
   date,
@@ -20,7 +20,7 @@ export async function writeNewTicket(
   await set(ref(db, "tickets/" + taskId), {
     user: { userId, userName, userAvatar },
     title,
-    select,
+    priority,
     decr,
     date,
     isOpen,

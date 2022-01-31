@@ -45,7 +45,6 @@ const P = styled.p`
   left: 32px;
 
   top: 32px;
-  font-family: Mulish;
   font-weight: bold;
   font-size: 19px;
 `;

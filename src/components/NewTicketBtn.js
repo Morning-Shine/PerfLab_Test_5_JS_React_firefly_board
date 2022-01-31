@@ -20,7 +20,6 @@ const StyledButton = styled(Button)`
   width: 117px;
   font-size: 14px;
   font-weight: 600;
-  font-family: Mulish;
   line-height: 24px;
   position: absolute;
   top: 27px;

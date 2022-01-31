@@ -7,8 +7,8 @@ import { setView } from "../store/tableViewSlice";
 
 export default function TableView() {
   const [disabledBtns, setDisabledBtns] = useState({
-    btnTile: true,
-    btnTable: false,
+    btnTile: false,
+    btnTable: true,
   });
 
   const dispatch = useDispatch();
@@ -66,7 +66,6 @@ const Div = styled.div`
 `;
 
 const P = styled.p`
-  font-family: Mulish;
   font-weight: bold;
   font-size: 14px;
   line-height: 24px;

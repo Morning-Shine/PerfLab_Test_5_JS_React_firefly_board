@@ -1,39 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import TableBasic from "./TableBasic";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTickets } from "../async/fetchTickets";
 
-import {
-  getDatabase,
-  ref,
-  query,
-  get,
-  orderByChild,
-  child,
-  orderByValue,
-  limitToLast,
-} from "firebase/database";
 
-// //TODO сколько получаем? Зависит от отображения?
-const db = getDatabase();
+
+//TODO сколько получаем? Зависит от отображения?
 
 export default function TableWrapper() {
   const viewProp = useSelector(state => state.tableView.currentView);
-  let ticketsData;
-  get(query(ref(db, "tickets"), orderByValue("taskId/date"), limitToLast(3)))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        ticketsData = snapshot.val();
-      }
-    })
-    .catch(error => {
-      console.error("ошибка получения данных при построении таблицы", error);
-    });
+  const dispatch = useDispatch();
+
+  // const [ticketsData, setTicketsData] = useState();
+  useEffect(() => {
+   // debugger
+    dispatch(fetchTickets(8));
+  });
 
   let render;
   viewProp == "table"
-    ? (render = <TableBasic ticketsData={ticketsData} />)
-    : (render = <DivCont> </DivCont>);
+    ? (render = <TableBasic />)
+    : (render = <DivCont>Карточки задач</DivCont>);
   return render;
 }
 

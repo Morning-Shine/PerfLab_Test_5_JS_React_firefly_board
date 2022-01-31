@@ -5,7 +5,7 @@ export const darkMode = createTheme({
     mode: "dark",
   },
   typography: {
-    fontFamily: ['"Mulish"'].join(","),
+    fontFamily: ['"Inter"'].join(","),
     // allVariants: {
     //   color: "#DDE2FF",
     // },

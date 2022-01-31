@@ -120,7 +120,6 @@ const Label = styled.label`
   position: absolute;
   top: 32px;
   left: 32px;
-  font-family: Mulish;
   font-weight: bold;
   font-size: 19px;
   line-height: 24px;

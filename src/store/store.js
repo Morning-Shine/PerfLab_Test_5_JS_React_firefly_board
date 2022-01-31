@@ -15,6 +15,8 @@ import loadingSlice from "./loadingSlice";
 import tableViewSlice from "./tableViewSlice";
 import themeSlice from "./themeSlice";
 import userSlice from "./userSlice";
+import firebaseDataLoadingSlice from "./firebaseDataLoadingSlice";
+
 
 
 const persistConfig = {
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
   loading: loadingSlice,
   theme: themeSlice,
   tableView: tableViewSlice,
+  firebaseData: firebaseDataLoadingSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
