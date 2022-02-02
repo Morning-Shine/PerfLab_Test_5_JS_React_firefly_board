@@ -1,38 +1,36 @@
 //TODO добавить отбор для from
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getFirestore } from "firebase/firestore";
 import {
-  getDatabase,
-  ref,
   query,
-  get,
-  orderByChild,
-  child,
-  orderByValue,
-  limitToLast,
-} from "firebase/database";
+  orderBy,
+  collection,
+  doc,
+  limit, 
+  startAt,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 
-const db = getDatabase();
+const db = getFirestore();
 
 export const fetchTickets = createAsyncThunk(
   "firebaseDataLoading/fetchTickets",
   async function (rangeNumbers, thunkAPI) {
-    //  console.log("thunkAPI", thunkAPI);
-    let ticketsData;
-    const snapshot = await get(
-      query(
-        ref(db, "tickets"),
-        orderByValue("taskId/date"),
-        limitToLast(rangeNumbers)
-      )
-    );
-    // console.log("snapshot", snapshot);
-    if (snapshot.exists()) {
-      ticketsData = snapshot.val();
-      // console.log("данные получены с сервера", ticketsData);
-      return ticketsData;
-    }
-    /*  .catch(error => {
-    console.error("ошибка получения данных при построении таблицы", error);
-});*/
+      const ticketsRef = collection(db, "tickets");
+      const ticketsQuery = query(
+        ticketsRef,
+        orderBy("date", "desc"),
+        //startAt(3),
+        limit(rangeNumbers.limit)
+      );
+      const ticketsSnapshot = await getDocs(ticketsQuery);
+      let tickets=[];
+      ticketsSnapshot.forEach(doc => {
+        tickets.push(doc.data());
+        // console.log(doc.id, " => ", doc.data(), typeof doc);
+      });
+      console.log(tickets);
+      return tickets;
   }
-);
+  )

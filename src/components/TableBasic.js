@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,9 +8,20 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styled from "@emotion/styled";
 import TableBasicRow from "./TableBasicRow";
+import { getDatabase, ref, onValue } from "firebase/database";
+
 
 export default function TableBasic() {
-  const tickets = useSelector(state => state.firebaseData.tickets);
+  // const [tickets, setTickets] = useState([]);
+   let tickets = useSelector(state => state.firebaseData.tickets);
+  //console.log(tickets);
+
+  // useEffect(() => {
+  //   onValue(ref(db, "tickets"), snapshot => {
+  //     setTickets(Object.entries(snapshot.val()));
+  //     // console.log("data from useEffect", data);
+  //   });
+  // }, [tickets]);
 
   return (
     <StyledTableContainer>
@@ -26,7 +37,7 @@ export default function TableBasic() {
         <TableBody>
           {tickets
             ? tickets.map(ticket => (
-                <TableBasicRow key={ticket[0]} ticket={ticket} />
+                <TableBasicRow key={ticket.taskId} ticket={ticket} />
               ))
             : null}
         </TableBody>

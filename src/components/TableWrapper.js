@@ -12,10 +12,8 @@ export default function TableWrapper() {
   const viewProp = useSelector(state => state.tableView.currentView);
   const dispatch = useDispatch();
 
-  // const [ticketsData, setTicketsData] = useState();
   useEffect(() => {
-   // debugger
-    dispatch(fetchTickets(8));
+    dispatch(fetchTickets({startAt: 1, limit: 8}));
   });
 
   let render;

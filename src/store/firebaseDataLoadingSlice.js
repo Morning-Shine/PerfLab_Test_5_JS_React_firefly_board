@@ -27,8 +27,8 @@ const firebaseDataLoading = createSlice({
     [fetchTickets.fulfilled]: (state, action) => {
       state.status = "resolved";
       state.error = null;
-      // console.log("получено в экстра редюсере", action);
-      state.tickets = Object.entries(action.payload);
+      //console.log("получено в экстра редюсере", action);
+      state.tickets = action.payload;
     },
     [fetchTickets.rejected]: (state, action) => {
       //state.tickets = action.payload; добавить обр. ошибки

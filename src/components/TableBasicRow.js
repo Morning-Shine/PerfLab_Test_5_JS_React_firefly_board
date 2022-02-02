@@ -1,42 +1,49 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import styled from "@emotion/styled";
 import formatAMPM from "../utils/formatAMPM";
+import Avatar from "@mui/material/Avatar";
 import { month } from "../utils/monts";
 
+//TODO "updated ... day ago"
 export default function TableBasicRow({ ticket }) {
   let priority;
-  switch (ticket[1].priority) {
+  switch (ticket.priority) {
     case "high":
       priority = (
         <PriorityColorHigh>
-          <StyledPriority>{ticket[1].priority}</StyledPriority>
+          <StyledPriority>{ticket.priority}</StyledPriority>
         </PriorityColorHigh>
       );
       break;
     case "normal":
       priority = (
         <PriorityColorNormal>
-          <StyledPriority>{ticket[1].priority}</StyledPriority>
+          <StyledPriority>{ticket.priority}</StyledPriority>
         </PriorityColorNormal>
       );
       break;
     case "low":
       priority = (
         <PriorityColorLow>
-          <StyledPriority>{ticket[1].priority}</StyledPriority>
+          <StyledPriority>{ticket.priority}</StyledPriority>
         </PriorityColorLow>
       );
       break;
   }
 
-  const date = new Date(ticket[1].date);
+  const date = new Date(ticket.date);
   const render = (
     <StyledTableRow>
-      <TableCell>{ticket[1].title}</TableCell>
-      <TableCell>{ticket[1].user.userName}</TableCell>
+      <StyledTableCellTickDet>
+        <StyledAvatar
+          src={ticket.user.userAvatar}
+          sx={{ width: 44, height: 44 }}
+        />
+        {ticket.title}
+      </StyledTableCellTickDet>
+      <TableCell>{ticket.user.userName}</TableCell>
       <TableCell>
         <StyledDate>
           {" "}
@@ -100,4 +107,14 @@ const StyledTime = styled.div`
   font-size: 12px;
   line-height: 16px;
   color: #c5c7cd;
+`;
+
+const StyledTableCellTickDet = styled(TableCell)`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledAvatar = styled(Avatar)`
+  margin-left: 16px;
+  margin-right: 24px;
 `;

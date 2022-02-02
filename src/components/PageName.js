@@ -8,7 +8,6 @@ export default function PageName({ name }) {
       <Typography
         sx={{
           fontSize: "24px",
-          fontFamily: "Mulish",
           fontWeight: "bold",
           letterSpacing: "0.3",
         }}
@@ -28,7 +27,6 @@ const Div = styled.div`
 `;
 
 // const P = styled.div`
-//   font-family: Mulish;
 //   font-weight: bold;
 //   font-size: 24px;
 //   line-height: 30px;
