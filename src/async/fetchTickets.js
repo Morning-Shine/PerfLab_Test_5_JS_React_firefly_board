@@ -12,7 +12,6 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-
 const db = getFirestore();
 export const fetchTickets = createAsyncThunk(
   "firebaseDataLoading/fetchTickets",
@@ -103,6 +102,21 @@ export const calcUserUncompletedTickets = createAsyncThunk(
     tickets.high = ticketsHigh.size;
     tickets.normal = ticketsNormal.size;
     tickets.low = ticketsLow.size;
+    return tickets;
+  }
+);
+
+export const totalTickets = createAsyncThunk(
+  "firebaseDataLoading/totalTickets",
+  async function (user, thunkAPI) {
+    const tickets = { total: 0, totalThisUser: 0 };
+    const ticketsRef = collection(db, "tickets");
+    const queryAll = query(ticketsRef);
+    const queryCurrentUser = query(ticketsRef, where("user.userId", "==", user));
+    const ticketsAll = await getDocs(queryAll);
+    const ticketsCurrentUser = await getDocs(queryCurrentUser);
+    tickets.total = ticketsAll.size;
+    tickets.totalThisUser = ticketsCurrentUser.size;
     return tickets;
   }
 );

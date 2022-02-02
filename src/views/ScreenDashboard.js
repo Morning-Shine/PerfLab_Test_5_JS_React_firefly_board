@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   calcAllUncompletedTickets,
   calcUserUncompletedTickets,
+  totalTickets,
 } from "../async/fetchTickets";
 
 export default function ScreenDashboard() {
@@ -19,6 +20,7 @@ export default function ScreenDashboard() {
   useEffect(() => {
     dispatch(calcAllUncompletedTickets());
     dispatch(calcUserUncompletedTickets(user));
+    dispatch(totalTickets(user));
   });
 
   return (

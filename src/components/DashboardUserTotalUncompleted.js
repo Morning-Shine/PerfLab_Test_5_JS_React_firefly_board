@@ -3,19 +3,26 @@ import styled from "@emotion/styled";
 import DashboardCard from "./DashboardCard";
 import { useSelector } from "react-redux";
 
-
 export default function DashboardUserTotalUncompleted() {
-  const totalUserData = useSelector(
+  const totalUserDataUncompleted = useSelector(
     state => state.firebaseData.calcUserUncompletedTickets
   );
 
-  const total = totalUserData.high + totalUserData.normal + totalUserData.low;
+  const totalUserData = useSelector(
+    state => state.firebaseData.totalTickets.totalThisUser
+  );
 
+  const total =
+    totalUserDataUncompleted.high +
+    totalUserDataUncompleted.normal +
+    totalUserDataUncompleted.low;
+
+  const percent = Math.round((total / totalUserData) * 100);
   const data = [
-    { name: "High", amount: totalUserData.high, percent: null },
-    { name: "Normal", amount: totalUserData.normal, percent: null },
-    { name: "Low", amount: totalUserData.low, percent: null },
-    { name: "Uncompleted", amount: total, percent: "20%" },
+    { name: "High", amount: totalUserDataUncompleted.high, percent: null },
+    { name: "Normal", amount: totalUserDataUncompleted.normal, percent: null },
+    { name: "Low", amount: totalUserDataUncompleted.low, percent: null },
+    { name: "Uncompleted", amount: total, percent: `${percent}%` },
   ];
   return (
     <Container>

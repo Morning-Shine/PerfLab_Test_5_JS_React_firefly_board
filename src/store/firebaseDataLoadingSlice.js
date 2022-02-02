@@ -3,6 +3,7 @@ import {
   fetchTickets,
   calcAllUncompletedTickets,
   calcUserUncompletedTickets,
+  totalTickets,
 } from "../async/fetchTickets";
 
 //TODO добавить обрабоку ошибок
@@ -73,6 +74,10 @@ const firebaseDataLoading = createSlice({
     [calcUserUncompletedTickets.rejected]: state => {
       //добавить обр. ошибки
     },
+    [totalTickets.fulfilled]: (state, action) => {
+    state.totalTickets.total = action.payload.total;
+    state.totalTickets.totalThisUser = action.payload.totalThisUser;
+    }
   },
 });
 
