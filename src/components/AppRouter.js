@@ -14,8 +14,8 @@ export default function AppRouter() {
       {privateRoutes.map(({ path, element }) => (
         <Route path={path} element={element} key={path} />
       ))}
-      <Route path="*" element={<Navigate to={TICKETS} />} />
-      {/* <Route path="*" element={<Navigate to={DASHBOARD} />} /> */}
+      {/* <Route path="*" element={<Navigate to={TICKETS} />} /> */}
+      <Route path="*" element={<Navigate to={DASHBOARD} />} />
     </Routes>
   ) : (
     <Routes>
