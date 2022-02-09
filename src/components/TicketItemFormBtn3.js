@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button, MenuItem } from "@mui/material";
 import TicketItemFormPopup from "./TicketItemFormPopup";
 import styled from "@emotion/styled";
@@ -9,17 +10,17 @@ import toast from "react-hot-toast";
 export default function TicketItemFormBtn3({ renderCondition, ...props }) {
   const navigate = useNavigate();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
- 
+  const [visible, setVisible] = React.useState(false);
+
   const btnTxt = renderCondition == "new" ? "Cancel" : "Delete";
   const goBack = () => navigate(-1);
 
-  const handleClickDelete = event => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-    //console.log(anchorEl);
+  const changePopupVisible = () => {
+    setVisible(!visible);
   };
 
-  /*const onDeleteHandler = async data => {
+  const onDeleteHandler = async () => {
+    setVisible(false);
     const loadingToast = toast.loading("Удаление тикета...");
     try {
       // throw new Error();
@@ -31,24 +32,24 @@ export default function TicketItemFormBtn3({ renderCondition, ...props }) {
     }
     toast.remove(loadingToast);
     toast.success("Удаление тикета успешно завершено");
-    reset();
+    setTimeout(() => goBack(), 1200);
   };
-*/
+
   return (
     <>
       <StyledButton
         disabled={props.disabled ? props.disabled : false}
         variant="contained"
-        onClick={
-          renderCondition == "new"
-            ? goBack
-            : handleClickDelete /*onDeleteHandler*/
-        }
+        onClick={renderCondition == "new" ? goBack : changePopupVisible}
       >
         {btnTxt}
       </StyledButton>
       {renderCondition != "new" ? (
-        <TicketItemFormPopup anchorEl={anchorEl} />
+        <TicketItemFormPopup
+          visible={visible}
+          changePopupVisible={changePopupVisible}
+          onDeleteHandler={onDeleteHandler}
+        />
       ) : null}
     </>
   );
