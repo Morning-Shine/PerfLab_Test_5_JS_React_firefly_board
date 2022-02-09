@@ -17,15 +17,12 @@ import toast from "react-hot-toast";
 import styled from "@emotion/styled";
 
 export default function TicketItemForm({ renderCondition }) {
-  // console.log("renderCondition", renderCondition);
   if (!renderCondition) return <Navigate to={"/tickets"} />;
   const [loading, setLoading] = useState(true);
   const [ticket, setTicket] = useState({});
-  //console.log("ticket из формы:", ticket);
 
   useEffect(() => {
     if (ticket.title && loading == true) {
-      //console.log("loading:", loading);
       setLoading(false);
     }
   });
@@ -33,14 +30,14 @@ export default function TicketItemForm({ renderCondition }) {
   useEffect(() => {
     if (renderCondition != "new") {
       try {
-        readTicket(renderCondition).then(res => setTicket(res));
+        readTicket(renderCondition).then((res) => setTicket(res));
       } catch {
-        err => console.log(err);
+        (err) => console.log(err);
       }
     }
   }, []);
 
-  const userData = useSelector(state => state.user);
+  const userData = useSelector((state) => state.user);
 
   const {
     handleSubmit,
@@ -51,7 +48,7 @@ export default function TicketItemForm({ renderCondition }) {
     mode: "onBlur",
   });
 
-  const onSubmitSave = async data => {
+  const onSubmitSave = async (data) => {
     const loadingToast = toast.loading("Создание заявки...");
     try {
       // throw new Error();
@@ -74,7 +71,7 @@ export default function TicketItemForm({ renderCondition }) {
     reset();
   };
 
-  const onSubmitupdate = async data => {
+  const onSubmitupdate = async (data) => {
     console.log("запуск функции onSubmitupdate");
     const loadingToast = toast.loading("Обновление заявки...");
     try {
@@ -189,7 +186,7 @@ export default function TicketItemForm({ renderCondition }) {
   return (
     <DivCont>
       <Notify />
-      <Form   
+      <Form
         onSubmit={
           renderCondition == "new"
             ? handleSubmit(onSubmitSave)
