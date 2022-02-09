@@ -13,6 +13,20 @@ import {
 } from "firebase/firestore";
 
 const db = getFirestore();
+
+/*export function fetchTickets(setState, limit , from) {
+  const ticketsRef = collection(db, "tickets");
+  const ticketsQuery = query(
+    ticketsRef,
+    orderBy("date", "desc"),
+    //limit(8)
+    //startAt(from),
+  );
+  onSnapshot(ticketsQuery, querySnapshot =>
+    setState(querySnapshot.docs.map(doc => doc.data()))
+  );
+}*/
+
 export const fetchTickets = createAsyncThunk(
   "firebaseDataLoading/fetchTickets",
   async function (rangeNumbers, thunkAPI) {
@@ -23,15 +37,6 @@ export const fetchTickets = createAsyncThunk(
       //startAt(3),
       limit(rangeNumbers.limit)
     );
-
-    /* let tickets = []; //TODO разобраться со снапшотами
-    const ticketsSnapshot = onSnapshot(ticketsQuery, querySnapshot => {
-      querySnapshot.forEach(doc => {
-        tickets.push(doc.data());
-      });
-      console.log('tickets', tickets);
-    });*/
-    // console.log("ticketsSnapshot", ticketsSnapshot);
     const ticketsSnapshot = await getDocs(ticketsQuery);
     let tickets = [];
     ticketsSnapshot.forEach(doc => {
@@ -112,7 +117,10 @@ export const totalTickets = createAsyncThunk(
     const tickets = { total: 0, totalThisUser: 0 };
     const ticketsRef = collection(db, "tickets");
     const queryAll = query(ticketsRef);
-    const queryCurrentUser = query(ticketsRef, where("user.userId", "==", user));
+    const queryCurrentUser = query(
+      ticketsRef,
+      where("user.userId", "==", user)
+    );
     const ticketsAll = await getDocs(queryAll);
     const ticketsCurrentUser = await getDocs(queryCurrentUser);
     tickets.total = ticketsAll.size;

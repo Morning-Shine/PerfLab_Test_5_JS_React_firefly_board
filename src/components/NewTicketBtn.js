@@ -7,9 +7,9 @@ import { CURRENT_TASK } from "../utils/constants";
 export default function NewTicketBtn() {
   return (
     // <nav>
-    <LinkPos to={`/tickets/new`}>
+    <StyledLink to={`/tickets/new`}>
       <StyledButton variant="contained">New Ticket</StyledButton>
-    </LinkPos>
+    </StyledLink>
     // </nav>
   );
 }
@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
   left: 146px;
 `;
 
-const LinkPos = styled(Link)`
+const StyledLink = styled(Link)`
   grid-row-start: 1;
   grid-row-end: 2;
 `;

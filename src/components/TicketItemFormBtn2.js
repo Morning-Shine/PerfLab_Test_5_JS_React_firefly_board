@@ -7,7 +7,7 @@ export default function TicketItemFormBtn2({ renderCondition }) {
     return null;
   }
   return (
-    <StyledButton variant="contained" color="warning">
+    <StyledButton variant="contained">
       Complete
     </StyledButton>
   );
@@ -23,4 +23,7 @@ const StyledButton = styled(Button)`
   background-color: #f2cf42;
   font-weight: 600;
   font-size: 14px;
+  &:hover {
+    background-color: #9f8930;
+  }
 `;

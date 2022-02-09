@@ -11,17 +11,9 @@ import TableBasicRow from "./TableBasicRow";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 
-export default function TableBasic() {
-  // const [tickets, setTickets] = useState([]);
-   let tickets = useSelector(state => state.firebaseData.tickets);
+export default function TableBasic(/*{ tickets }*/) { //onSnapshot
+  let tickets = useSelector(state => state.firebaseData.tickets);
   //console.log(tickets);
-
-  // useEffect(() => {
-  //   onValue(ref(db, "tickets"), snapshot => {
-  //     setTickets(Object.entries(snapshot.val()));
-  //     // console.log("data from useEffect", data);
-  //   });
-  // }, [tickets]);
 
   return (
     <StyledTableContainer>

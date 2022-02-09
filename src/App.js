@@ -28,7 +28,7 @@ function App() {
 
   let render;
   loading
-    ? // isLoading
+    ? 
       (render = (
         <div className="AppLoader">
           <Loader />

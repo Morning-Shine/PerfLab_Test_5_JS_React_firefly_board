@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
-export default function TicketItemFormDescription({ control, name }) {
+export default function TicketItemFormDescription({ control, name, ...props }) {
+  const [formValue, setFormValue] = useState(props.value);
+
   return (
     <Controller
       name={name}
@@ -19,6 +21,8 @@ export default function TicketItemFormDescription({ control, name }) {
               message: "Ограничение на ввод 100 символов",
             },
           })}
+          value={props.value ? formValue : undefined}
+          onChange={e => setFormValue(e.target.value)}
         />
       )}
     />

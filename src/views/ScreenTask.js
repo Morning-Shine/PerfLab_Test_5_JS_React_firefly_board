@@ -5,16 +5,14 @@ import styled from "@emotion/styled";
 import TicketItemForm from "../components/TicketItemForm";
 import { useParams } from "react-router-dom";
 
-
 export default function ScreenTask() {
-  // console.log("useParams", useParams());
   const { taskId } = useParams();
   return (
     <DivCont>
       <SideBar />
       <Div>
         <ControlPanel />
-        <TicketItemForm />
+        <TicketItemForm renderCondition={taskId} />
       </Div>
     </DivCont>
   );

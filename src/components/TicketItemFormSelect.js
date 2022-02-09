@@ -6,22 +6,16 @@ import InputLabel from "@mui/material/InputLabel";
 import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
-
-export default function TicketItemFormSelect({ control, name }) {
-  const priorityForChoice = ["low", "normal", "high"];
+export default function TicketItemFormSelect({ control, name, ...props }) {
   return (
     <>
       <Controller
-        defaultValue={""}
+        defaultValue={props.value ? props.value : ""}
         name={name}
         control={control}
         render={({ field }) => (
           <>
-            {/* <StyledInputLabel id="placeholder">
-              Select Priority *
-            </StyledInputLabel> */}
             <StyledSelect
-             // labelId="placeholder"
               required
               {...field}
               {...control.register(name, {
@@ -34,7 +28,7 @@ export default function TicketItemFormSelect({ control, name }) {
             </StyledSelect>
           </>
         )}
-      />      
+      />
     </>
   );
 }

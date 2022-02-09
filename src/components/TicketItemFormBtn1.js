@@ -3,15 +3,10 @@ import Button from "@mui/material/Button";
 import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
-export default function TicketItemFormBtn1({ isValid }) {
+export default function TicketItemFormBtn1({ isValid, text }) {
   return (
-    <StyledButton
-      variant="contained"
-      color="success"
-      type="submit"
-      disabled={!isValid}
-    >
-      Save details
+    <StyledButton variant="contained" type="submit" disabled={!isValid}>
+      {text}
     </StyledButton>
   );
 }
@@ -27,4 +22,7 @@ const StyledButton = styled(Button)`
   font-weight: 600;
   font-size: 14px;
   color: black;
+  &:hover {
+    background-color: #3c845a;
+  }
 `;

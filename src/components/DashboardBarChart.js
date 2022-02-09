@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
-import { Bar, ResponsiveBar } from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 
 const testData = [
   {
@@ -132,9 +132,9 @@ export default function DashboardBarChart() {
             itemDirection: "left-to-right",
             itemsSpacing: 2,
             itemWidth: 100,
-            itemHeight: -50,
             symbolSize: 20,
             itemsSpacing: 145,
+            itemHeight: -50, //TODO errer: A negative value is not valid. ("-50")
             translateY: -30,
             translateX: -25,
             effects: [

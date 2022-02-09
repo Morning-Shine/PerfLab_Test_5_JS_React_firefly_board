@@ -5,9 +5,17 @@ import styled from "@emotion/styled";
 import formatAMPM from "../utils/formatAMPM";
 import Avatar from "@mui/material/Avatar";
 import { month } from "../utils/monts";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 //TODO "updated ... day ago"
 export default function TableBasicRow({ ticket }) {
+  const currentUser = useSelector(state => state.user.id);
+  // const { taskId } = useParams();
+
+  //console.log(currentUser);
+  //console.log("this ticket", ticket.taskId);
   let priority;
   switch (ticket.priority) {
     case "high":
@@ -41,7 +49,7 @@ export default function TableBasicRow({ ticket }) {
           src={ticket.user.userAvatar}
           sx={{ width: 44, height: 44 }}
         />
-        {ticket.title}
+        <StyledLink to={`/tickets/${ticket.taskId}`}>{ticket.title}</StyledLink>
       </StyledTableCellTickDet>
       <TableCell>{ticket.user.userName}</TableCell>
       <TableCell>
@@ -51,13 +59,21 @@ export default function TableBasicRow({ ticket }) {
         </StyledDate>
         <StyledTime>{formatAMPM(date)}</StyledTime>
       </TableCell>
-      <TableCell>{priority}</TableCell>
+      <StyledTableCellPriority>
+        {priority}
+        {currentUser == ticket.user.userId ? (
+          <StyledDeleteIcon color="action" />
+        ) : null}
+      </StyledTableCellPriority>
     </StyledTableRow>
   );
-
   return render;
 }
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 const StyledTableRow = styled(TableRow)`
   font-style: normal;
   font-weight: 600;
@@ -117,4 +133,13 @@ const StyledTableCellTickDet = styled(TableCell)`
 const StyledAvatar = styled(Avatar)`
   margin-left: 16px;
   margin-right: 24px;
+`;
+
+const StyledTableCellPriority = styled(TableCell)`
+  //border: 1px solid red;
+  position: relative;
+`;
+const StyledDeleteIcon = styled(DeleteIcon)`
+  position: absolute;
+  right: 36px;
 `;

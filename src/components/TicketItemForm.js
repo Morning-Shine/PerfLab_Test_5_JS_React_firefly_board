@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FormHelperText from "@mui/material/FormHelperText";
 import { Navigate } from "react-router-dom";
-import { Guid } from "js-guid";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { writeNewTicket } from "../firebaseApp";
+import { writeNewTicket, readTicket, updateTicket } from "../firebaseApp";
+import Loader from "./Loader";
 import Notify from "./Notify";
 import TicketItemFormTitle from "./TicketItemFormTitle";
 import TicketItemFormSelect from "./TicketItemFormSelect";
@@ -17,8 +17,28 @@ import toast from "react-hot-toast";
 import styled from "@emotion/styled";
 
 export default function TicketItemForm({ renderCondition }) {
-  //  console.log("renderCondition", renderCondition);
+  // console.log("renderCondition", renderCondition);
   if (!renderCondition) return <Navigate to={"/tickets"} />;
+  const [loading, setLoading] = useState(true);
+  const [ticket, setTicket] = useState({});
+  //console.log("ticket из формы:", ticket);
+
+  useEffect(() => {
+    if (ticket.title && loading == true) {
+      //console.log("loading:", loading);
+      setLoading(false);
+    }
+  });
+
+  useEffect(() => {
+    if (renderCondition != "new") {
+      try {
+        readTicket(renderCondition).then(res => setTicket(res));
+      } catch {
+        err => console.log(err);
+      }
+    }
+  }, []);
 
   const userData = useSelector(state => state.user);
 
@@ -31,11 +51,8 @@ export default function TicketItemForm({ renderCondition }) {
     mode: "onBlur",
   });
 
-  const taskId = Guid.newGuid().StringGuid.replaceAll("-", "");
-
-  const onSubmit = async data => {
+  const onSubmitSave = async data => {
     const loadingToast = toast.loading("Создание заявки...");
-    //  console.log("1)loadingToast", loadingToast);
     try {
       // throw new Error();
       await writeNewTicket(
@@ -45,30 +62,44 @@ export default function TicketItemForm({ renderCondition }) {
         data.ticketTitle,
         data.selectPriority,
         data.description,
-        taskId,
-        new Date().getTime(),
         true
       );
     } catch {
-      //   console.log("2)loadingToast error", loadingToast);
       setTimeout(() => toast.remove(loadingToast), 1000);
       toast.error("Ошибка создания заявки");
       return;
     }
-    //  console.log("3)loadingToast success", loadingToast);
     toast.remove(loadingToast);
     toast.success("Заявка успешно создана");
     reset();
   };
 
-  return (
-    <DivCont>
-      <Notify />
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label>
-          {renderCondition == "new" ? "New task" : `Task №${renderCondition}`}
-        </Label>
+  const onSubmitupdate = async data => {
+    console.log("запуск функции onSubmitupdate");
+    const loadingToast = toast.loading("Обновление заявки...");
+    try {
+      // throw new Error();
+      await updateTicket(
+        renderCondition,
+        data.ticketTitle,
+        data.selectPriority,
+        data.description,
+        true
+      );
+    } catch {
+      setTimeout(() => toast.remove(loadingToast), 1000);
+      toast.error("Ошибка обновления заявки");
+      return;
+    }
+    toast.remove(loadingToast);
+    toast.success("Заявка успешно обновлена");
+    reset();
+  };
 
+  let formRender;
+  if (renderCondition == "new") {
+    formRender = (
+      <>
         <TicketItemFormTitle
           name="ticketTitle"
           aria-describedby="helperTitle"
@@ -77,7 +108,6 @@ export default function TicketItemForm({ renderCondition }) {
         <FormHelperText1 id="helperTitle">
           {errors.ticketTitle?.message}
         </FormHelperText1>
-
         <TicketItemFormSelect
           name="selectPriority"
           aria-describedby="helperSelect"
@@ -86,14 +116,88 @@ export default function TicketItemForm({ renderCondition }) {
         <FormHelperText2 id="helperSelect">
           {errors.selectPriority?.message}
         </FormHelperText2>
-
         <TicketItemFormDescription name="description" control={control} />
         <FormHelperText3 id="helperSelect">
           {errors.description?.message}
         </FormHelperText3>
-        <TicketItemFormBtn1 type="submit" isValid={isValid} />
+        <TicketItemFormBtn1
+          type="submit"
+          isValid={isValid}
+          text={"Save details"}
+        />
         <TicketItemFormBtn2 renderCondition={renderCondition} />
         <TicketItemFormBtn3 renderCondition={renderCondition} />
+      </>
+    );
+  }
+
+  if (renderCondition != "new" && loading == true) {
+    formRender = (
+      <DivLoader>
+        <Loader />
+      </DivLoader>
+    );
+  }
+
+  if (renderCondition != "new" && loading == false) {
+    formRender = (
+      <>
+        <TicketItemFormTitle
+          name="ticketTitle"
+          aria-describedby="helperTitle"
+          control={control}
+          value={ticket.title}
+        />
+        <FormHelperText1 id="helperTitle">
+          {errors.ticketTitle?.message}
+        </FormHelperText1>
+        <TicketItemFormSelect
+          name="selectPriority"
+          aria-describedby="helperSelect"
+          control={control}
+          value={ticket.priority}
+        />
+        <FormHelperText2 id="helperSelect">
+          {errors.selectPriority?.message}
+        </FormHelperText2>
+        <TicketItemFormDescription
+          name="description"
+          control={control}
+          value={ticket.decr}
+        />
+        <FormHelperText3 id="helperSelect">
+          {errors.description?.message}
+        </FormHelperText3>
+        <TicketItemFormBtn1
+          type="submit"
+          isValid={isValid}
+          text={"Update"}
+          disabled={userData.id == ticket.user.userId ? false : true}
+        />
+        <TicketItemFormBtn2
+          renderCondition={renderCondition}
+          disabled={userData.id == ticket.user.userId ? false : true}
+        />
+        <TicketItemFormBtn3
+          renderCondition={renderCondition}
+          disabled={userData.id == ticket.user.userId ? false : true}
+        />
+      </>
+    );
+  }
+
+  return (
+    <DivCont>
+      <Notify />
+      <Form   
+        onSubmit={
+          renderCondition == "new"
+            ? handleSubmit(onSubmitSave)
+            : handleSubmit(onSubmitupdate)
+        }
+      >
+        <Label>{renderCondition == "new" ? "New task" : "Editing"}</Label>
+        {formRender}
       </Form>
     </DivCont>
   );
@@ -105,6 +209,12 @@ const DivCont = styled.div`
   top: 128px;
   height: 372px;
   margin-left: 30px;
+`;
+
+const DivLoader = styled.div`
+  position: absolute;
+  left: calc(50% - 35px);
+  top: calc(50% - 35px);
 `;
 
 const Form = styled.form`

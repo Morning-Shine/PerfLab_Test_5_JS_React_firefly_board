@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
-export default function TicketItemFormTitle({ control, name }) {
+export default function TicketItemFormTitle({ control, name, ...props }) {
+  const [formValue, setFormValue] = useState(props.value);
+
   return (
     <Controller
       name={name}
@@ -25,6 +27,8 @@ export default function TicketItemFormTitle({ control, name }) {
               message: "Не менее 5 символов",
             },
           })}
+          value={props.value ? formValue : undefined}
+          onChange={e => setFormValue(e.target.value)}
         />
       )}
     />
