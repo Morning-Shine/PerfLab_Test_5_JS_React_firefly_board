@@ -16,6 +16,7 @@ export default function TicketItemFormSelect({ control, name, ...props }) {
         render={({ field }) => (
           <>
             <StyledSelect
+              disabled={props.disabled}
               required
               {...field}
               {...control.register(name, {

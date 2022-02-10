@@ -11,11 +11,8 @@ import { Link, useParams } from "react-router-dom";
 
 //TODO "updated ... day ago"
 export default function TableBasicRow({ ticket }) {
-  const currentUser = useSelector(state => state.user.id);
-  // const { taskId } = useParams();
+  const currentUser = useSelector((state) => state.user.id);
 
-  //console.log(currentUser);
-  //console.log("this ticket", ticket.taskId);
   let priority;
   switch (ticket.priority) {
     case "high":
@@ -42,8 +39,8 @@ export default function TableBasicRow({ ticket }) {
   }
 
   const date = new Date(ticket.date);
-  const render = (
-    <StyledTableRow>
+  const insideRow = (
+    <>
       <StyledTableCellTickDet>
         <StyledAvatar
           src={ticket.user.userAvatar}
@@ -65,19 +62,32 @@ export default function TableBasicRow({ ticket }) {
           <StyledDeleteIcon color="action" />
         ) : null}
       </StyledTableCellPriority>
-    </StyledTableRow>
+    </>
   );
-  return render;
+
+  return ticket.isOpen ? (
+    <StyledTableRow>{insideRow}</StyledTableRow>
+  ) : (
+    <StyledTableRowClose>{insideRow}</StyledTableRowClose>
+  );
 }
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
+const StyledTableRowClose = styled(TableRow)`
+  background: #ebffe6;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+`;
 const StyledTableRow = styled(TableRow)`
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 const StyledPriority = styled.div`
@@ -128,6 +138,7 @@ const StyledTime = styled.div`
 const StyledTableCellTickDet = styled(TableCell)`
   display: flex;
   align-items: center;
+  border: none;
 `;
 
 const StyledAvatar = styled(Avatar)`

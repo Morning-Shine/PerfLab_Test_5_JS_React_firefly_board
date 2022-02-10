@@ -1,11 +1,15 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
-export default function TicketItemFormBtn1({ isValid, text }) {
+
+export default function TicketItemFormBtn1({ isValid, text, disabled }) {
   return (
-    <StyledButton variant="contained" type="submit" disabled={!isValid}>
+    <StyledButton
+      variant="contained"
+      type="submit"
+      disabled={!isValid || disabled}
+    >
       {text}
     </StyledButton>
   );

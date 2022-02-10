@@ -72,7 +72,7 @@ export default function TicketItemForm({ renderCondition }) {
   };
 
   const onSubmitupdate = async (data) => {
-    console.log("запуск функции onSubmitupdate");
+    //console.log("запуск функции onSubmitupdate");
     const loadingToast = toast.loading("Обновление заявки...");
     try {
       // throw new Error();
@@ -144,6 +144,7 @@ export default function TicketItemForm({ renderCondition }) {
           aria-describedby="helperTitle"
           control={control}
           value={ticket.title}
+          disabled={!ticket.isOpen}
         />
         <FormHelperText1 id="helperTitle">
           {errors.ticketTitle?.message}
@@ -153,6 +154,7 @@ export default function TicketItemForm({ renderCondition }) {
           aria-describedby="helperSelect"
           control={control}
           value={ticket.priority}
+          disabled={!ticket.isOpen}
         />
         <FormHelperText2 id="helperSelect">
           {errors.selectPriority?.message}
@@ -161,6 +163,7 @@ export default function TicketItemForm({ renderCondition }) {
           name="description"
           control={control}
           value={ticket.decr}
+          disabled={!ticket.isOpen}
         />
         <FormHelperText3 id="helperSelect">
           {errors.description?.message}
@@ -169,15 +172,15 @@ export default function TicketItemForm({ renderCondition }) {
           type="submit"
           isValid={isValid}
           text={"Update"}
-          disabled={userData.id == ticket.user.userId ? false : true}
+          disabled={userData.id != ticket.user.userId || !ticket.isOpen}
         />
         <TicketItemFormBtn2
           renderCondition={renderCondition}
-          disabled={userData.id == ticket.user.userId ? false : true}
+          disabled={userData.id != ticket.user.userId || !ticket.isOpen}
         />
         <TicketItemFormBtn3
           renderCondition={renderCondition}
-          disabled={userData.id == ticket.user.userId ? false : true}
+          disabled={userData.id != ticket.user.userId || !ticket.isOpen}
         />
       </>
     );
@@ -193,7 +196,13 @@ export default function TicketItemForm({ renderCondition }) {
             : handleSubmit(onSubmitupdate)
         }
       >
-        <Label>{renderCondition == "new" ? "New task" : "Editing"}</Label>
+        <Label>
+          {renderCondition == "new"
+            ? "New task"
+            : ticket.isOpen
+            ? "Editing"
+            : "Ticket closed"}
+        </Label>
         {formRender}
       </Form>
     </DivCont>

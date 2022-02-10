@@ -1,17 +1,46 @@
 import React from "react";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
+import { closeTicket } from "../firebaseApp";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-export default function TicketItemFormBtn2({ renderCondition }) {
+
+export default function TicketItemFormBtn2({ renderCondition, disabled }) {
   if (renderCondition == "new") {
     return null;
   }
+  const navigate = useNavigate();
+
+  const goBack = () => navigate(-1);
+  
+  const closeHandler = async () => {
+    const loadingToast = toast.loading("Закрытие тикета...");
+    try {
+      // throw new Error();
+      await closeTicket(renderCondition);
+    } catch {
+      setTimeout(() => toast.remove(loadingToast), 1000);
+      toast.error("Ошибка закрытия тикета");
+      return;
+    }
+    toast.remove(loadingToast);
+    toast.success("Тикет успешно завершён");
+    setTimeout(() => goBack(), 1200);
+  };
+
   return (
-    <StyledButton variant="contained">
+    <StyledButton
+      variant="contained"
+      disabled={disabled ? disabled : false}
+      onClick={closeHandler}
+    >
       Complete
     </StyledButton>
   );
 }
+
+
 
 const StyledButton = styled(Button)`
   position: absolute;

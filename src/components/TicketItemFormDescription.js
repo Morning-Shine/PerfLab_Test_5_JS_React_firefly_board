@@ -23,6 +23,7 @@ export default function TicketItemFormDescription({ control, name, ...props }) {
           })}
           value={props.value ? formValue : undefined}
           onChange={e => setFormValue(e.target.value)}
+          disabled={props.disabled}
         />
       )}
     />

@@ -70,3 +70,13 @@ export async function deleteTicket(id) {
     console.log("ERROR in deleteTicket:", err);
   }
 }
+
+export async function closeTicket(id) {
+  await updateDoc(doc(collection(db, "tickets"), id), {
+    isOpen: false,
+  });
+  try {
+  } catch (err) {
+    console.log("ERROR in closeTicket:", err);
+  }
+}
