@@ -14,7 +14,7 @@ import {
 
 const db = getFirestore();
 
-/*export function fetchTickets(setState, limit , from) {
+export function fetchTickets(setState, limit, from) {
   const ticketsRef = collection(db, "tickets");
   const ticketsQuery = query(
     ticketsRef,
@@ -25,9 +25,9 @@ const db = getFirestore();
   onSnapshot(ticketsQuery, querySnapshot =>
     setState(querySnapshot.docs.map(doc => doc.data()))
   );
-}*/
-
-export const fetchTickets = createAsyncThunk(
+}
+/*при смене функций также вносить изменения в TableWrapper и TableBasic*/
+/* export const fetchTickets = createAsyncThunk(
   "firebaseDataLoading/fetchTickets",
   async function (rangeNumbers, thunkAPI) {
     const ticketsRef = collection(db, "tickets");
@@ -44,7 +44,7 @@ export const fetchTickets = createAsyncThunk(
     });
     return tickets;
   }
-);
+);*/
 
 export const calcAllUncompletedTickets = createAsyncThunk(
   "firebaseDataLoading/calcAllUncompletedTickets",

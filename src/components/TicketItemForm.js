@@ -72,7 +72,6 @@ export default function TicketItemForm({ renderCondition }) {
   };
 
   const onSubmitupdate = async (data) => {
-    //console.log("запуск функции onSubmitupdate");
     const loadingToast = toast.loading("Обновление заявки...");
     try {
       // throw new Error();

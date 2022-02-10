@@ -11,10 +11,9 @@ import TableBasicRow from "./TableBasicRow";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 
-export default function TableBasic(/*{ tickets }*/) { //onSnapshot
-  let tickets = useSelector(state => state.firebaseData.tickets);
-  //console.log(tickets);
-
+export default function TableBasic({ tickets }) { //onSnapshot
+  //let tickets = useSelector(state => state.firebaseData.tickets); //через get с limit()
+  
   return (
     <StyledTableContainer>
       <Table aria-label="simple table">
