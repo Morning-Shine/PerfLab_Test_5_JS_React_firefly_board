@@ -48,14 +48,14 @@ export default function TableBasicRow({ ticket }) {
         />
         <StyledLink to={`/tickets/${ticket.taskId}`}>{ticket.title}</StyledLink>
       </StyledTableCellTickDet>
-      <TableCell>{ticket.user.userName}</TableCell>
-      <TableCell>
+      <StyledTableCellOthers>{ticket.user.userName}</StyledTableCellOthers>
+      <StyledTableCellOthers>
         <StyledDate>
           {" "}
           {`${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}
         </StyledDate>
         <StyledTime>{formatAMPM(date)}</StyledTime>
-      </TableCell>
+      </StyledTableCellOthers>
       <StyledTableCellPriority>
         {priority}
         {currentUser == ticket.user.userId ? (
@@ -77,17 +77,17 @@ const StyledLink = styled(Link)`
   color: inherit;
 `;
 const StyledTableRowClose = styled(TableRow)`
-  background: #ebffe6;
+  background: rgba(194, 255, 179, 0.3);
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 0.5px solid #e0e0e0;
 `;
 const StyledTableRow = styled(TableRow)`
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 0.5px solid #e0e0e0;
 `;
 
 const StyledPriority = styled.div`
@@ -147,10 +147,15 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const StyledTableCellPriority = styled(TableCell)`
-  //border: 1px solid red;
   position: relative;
+  border: none;
 `;
 const StyledDeleteIcon = styled(DeleteIcon)`
   position: absolute;
   right: 36px;
+`;
+
+const StyledTableCellOthers = styled(TableCell)`
+  position: relative;
+  border: none;
 `;

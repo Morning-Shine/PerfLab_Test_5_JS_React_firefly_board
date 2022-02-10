@@ -33,14 +33,12 @@ const DivCont = styled.div`
 `;
 
 const DivTitle = styled.div`
-  //border: 1px solid red;
   height: 100%;
   grid-row-start: 1;
   grid-row-end: 2;
 `;
 
 const P = styled.p`
-  //border: 1px solid blue;
   position: absolute;
   left: 32px;
 

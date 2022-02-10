@@ -134,7 +134,7 @@ export default function DashboardBarChart() {
             itemWidth: 100,
             symbolSize: 20,
             itemsSpacing: 145,
-            itemHeight: -50, //TODO errer: A negative value is not valid. ("-50")
+            itemHeight: -50, //TODO error: A negative value is not valid. ("-50")
             translateY: -30,
             translateX: -25,
             effects: [
@@ -153,7 +153,6 @@ export default function DashboardBarChart() {
 }
 
 const Div = styled.div`
-  //border: 1px solid red;
   max-height: calc(100vh - 420px);
   min-height: calc(100vh - 600px);
   height: 55vh;

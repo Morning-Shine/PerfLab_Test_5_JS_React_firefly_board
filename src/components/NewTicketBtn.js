@@ -2,15 +2,13 @@ import React from "react";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import { CURRENT_TASK } from "../utils/constants";
+
 
 export default function NewTicketBtn() {
   return (
-    // <nav>
     <StyledLink to={`/tickets/new`}>
       <StyledButton variant="contained">New Ticket</StyledButton>
     </StyledLink>
-    // </nav>
   );
 }
 

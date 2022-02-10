@@ -6,9 +6,7 @@ export default function Login() {
   //TODO картинку или что-то посимпатичнее на фон
   return (
     <div className={styles.container}>
-      <div className={styles.sticker}>
         <ButtonAuth />
-      </div>
     </div>
   );
 }

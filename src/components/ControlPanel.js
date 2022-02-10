@@ -22,18 +22,12 @@ export default function ControlPanel() {
 }
 
 const Div = styled.div`
-  //border: 1px solid red;
-
   position: absolute;
   top: 0;
   right: 0px;
-  /* right: 33px; */
-  
   padding-right: 33px;
   padding-top: 30px;
-  /* margin-top: 30px; */
   width: 300px;
-  /* height: 50px; */
   height: 80px;
   display: flex;
   align-items: center;

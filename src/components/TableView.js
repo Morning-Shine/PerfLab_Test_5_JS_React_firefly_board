@@ -13,7 +13,6 @@ export default function TableView() {
 
   const dispatch = useDispatch();
   const viewState = useSelector(state => state.tableView.currentView);
- // console.log(viewState);
 
   const setViewTile = () => {
     dispatch(

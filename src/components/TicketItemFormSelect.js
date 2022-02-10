@@ -1,8 +1,6 @@
 import React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
 import { Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 
@@ -41,10 +39,4 @@ const StyledSelect = styled(Select)`
   height: 56px;
   width: 344px;
 `;
-const StyledInputLabel = styled(InputLabel)`
-  position: absolute;
-  top: 113px;
-  left: 410px;
-  height: 56px;
-  width: 344px;
-`;
+

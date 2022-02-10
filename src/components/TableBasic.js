@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";//через get с limit()
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,7 @@ export default function TableBasic({ tickets }) { //onSnapshot
   //let tickets = useSelector(state => state.firebaseData.tickets); //через get с limit()
   
   return (
-    <StyledTableContainer>
+    <TableContainer>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -33,13 +33,9 @@ export default function TableBasic({ tickets }) { //onSnapshot
             : null}
         </TableBody>
       </Table>
-    </StyledTableContainer>
+    </TableContainer>
   );
 }
-
-const StyledTableContainer = styled(TableContainer)`
-  /* border: red solid 1px; */
-`;
 
 const StyledHeaderCell = styled(TableCell)`
   color: #9fa2b4;
@@ -48,4 +44,5 @@ const StyledHeaderCell = styled(TableCell)`
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.2px;
+  border-bottom: 1px solid #e0e0e0;
 `;

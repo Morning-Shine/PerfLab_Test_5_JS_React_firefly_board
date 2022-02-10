@@ -18,11 +18,16 @@ export default function DashboardUserTotalUncompleted() {
     totalUserDataUncompleted.low;
 
   const percent = Math.round((total / totalUserData) * 100);
+
   const data = [
     { name: "High", amount: totalUserDataUncompleted.high, percent: null },
     { name: "Normal", amount: totalUserDataUncompleted.normal, percent: null },
     { name: "Low", amount: totalUserDataUncompleted.low, percent: null },
-    { name: "Uncompleted", amount: total, percent: `${percent}%` },
+    {
+      name: "Uncompleted",
+      amount: total,
+      percent: percent ? `${percent}%` : null,
+    },
   ];
   return (
     <Container>

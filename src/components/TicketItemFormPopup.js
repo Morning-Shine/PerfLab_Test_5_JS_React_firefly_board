@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { drawerWidth } from "./SideBar";
 import { Button } from "@mui/material";
@@ -8,7 +8,6 @@ export default function TicketItemFormPopup({
   changePopupVisible,
   onDeleteHandler,
 }) {
-  // console.log("visible", visible);
   return visible ? (
     <DivCont>
       <Popup>
@@ -26,7 +25,6 @@ export default function TicketItemFormPopup({
   ) : null;
 }
 const DivCont = styled.div`
-  /* border: 1px red solid; */
   position: fixed;
   top: 0;
   left: ${drawerWidth}px;
@@ -43,20 +41,14 @@ const Popup = styled.div`
   top: 178px;
   height: 272px;
   margin-left: 290px;
-  /* background: rgba(221, 226, 225,1); */
   background: #363740;
-  //border-radius: 8px;
 `;
 
 const BtnCont = styled.div`
-  //border: 1px solid red;
   justify-content: space-around;
   display: flex;
 `;
 const StyledButton1 = styled(Button)`
-  /* position: absolute;
-  left: 612px;
-  top: 269px; */
   height: 40px;
   width: 124px;
   text-transform: none;
@@ -70,9 +62,6 @@ const StyledButton1 = styled(Button)`
 `;
 
 const StyledButton2 = styled(Button)`
-  /* position: absolute;
-  left: 612px;
-  top: 269px; */
   height: 40px;
   width: 124px;
   text-transform: none;
