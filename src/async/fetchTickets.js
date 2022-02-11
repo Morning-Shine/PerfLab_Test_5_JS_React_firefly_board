@@ -14,18 +14,25 @@ import {
 
 const db = getFirestore();
 
+let unsubscriber;
+
 export function fetchTickets(setState, limit, from) {
   const ticketsRef = collection(db, "tickets");
   const ticketsQuery = query(
     ticketsRef,
-    orderBy("date", "desc"),
+    orderBy("date", "desc")
     //limit(8)
     //startAt(from),
   );
-  onSnapshot(ticketsQuery, querySnapshot =>
-    setState(querySnapshot.docs.map(doc => doc.data()))
+  unsubscriber = onSnapshot(ticketsQuery, (querySnapshot) =>
+    setState(querySnapshot.docs.map((doc) => doc.data()))
   );
 }
+
+export function unsubscribeSnapshot() {
+  unsubscriber();
+}
+
 /*при смене функций также вносить изменения в TableWrapper и TableBasic*/
 /* export const fetchTickets = createAsyncThunk(
   "firebaseDataLoading/fetchTickets",
