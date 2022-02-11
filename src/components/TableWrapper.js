@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import TableBasic from "./TableBasic";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTickets } from "../async/fetchTickets";
+import { fetchTickets, unsubscribeSnapshot } from "../async/fetchTickets";
 
 //TODO сколько получаем? Зависит от отображения?
 
 export default function TableWrapper() {
   const [tickets, setTickets] = useState([]); //onSnapshot
-
+  const abortController = new AbortController();
   const viewProp = useSelector((state) => state.tableView.currentView);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchTickets(setTickets, 8); //onSnapshot
     //dispatch(fetchTickets({ startAt: 1, limit: 8 }));//через get с limit()
-    //TODO return на отписку! 
+    return () => unsubscribeSnapshot();
   });
 
   let render;
