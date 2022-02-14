@@ -127,14 +127,14 @@ export default function DashboardBarChart() {
         legends={[
           {
             dataFrom: "keys",
-            anchor: "top-left",
+            anchor: "bottom-left",
             direction: "row",
             itemDirection: "left-to-right",
             itemsSpacing: 2,
             itemWidth: 100,
             symbolSize: 20,
             itemsSpacing: 145,
-            itemHeight: -50, //TODO error: A negative value is not valid. ("-50")
+            itemHeight: 410,
             translateY: -30,
             translateX: -25,
             effects: [

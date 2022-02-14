@@ -25,6 +25,7 @@ export default function TicketItemForm({ renderCondition }) {
     if (ticket.title && loading == true) {
       setLoading(false);
     }
+    //return () => toast.remove();
   });
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { fetchTickets, unsubscribeSnapshot } from "../async/fetchTickets";
 
 export default function TableWrapper() {
   const [tickets, setTickets] = useState([]); //onSnapshot
-  const abortController = new AbortController();
+
   const viewProp = useSelector((state) => state.tableView.currentView);
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ export default function TableWrapper() {
     fetchTickets(setTickets, 8); //onSnapshot
     //dispatch(fetchTickets({ startAt: 1, limit: 8 }));//через get с limit()
     return () => unsubscribeSnapshot();
-  });
+  }, []);
 
   let render;
   viewProp == "table"
