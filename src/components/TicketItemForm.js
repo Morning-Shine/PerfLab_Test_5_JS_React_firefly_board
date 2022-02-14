@@ -17,25 +17,33 @@ import toast from "react-hot-toast";
 import styled from "@emotion/styled";
 
 export default function TicketItemForm({ renderCondition }) {
-  if (!renderCondition) return <Navigate to={"/tickets"} />;
   const [loading, setLoading] = useState(true);
   const [ticket, setTicket] = useState({});
 
   useEffect(() => {
-    if (ticket.title && loading == true) {
+    if (ticket?.title && loading == true) {
       setLoading(false);
     }
-    //return () => toast.remove();
   });
 
   useEffect(() => {
     if (renderCondition != "new") {
-      try {
-        readTicket(renderCondition).then((res) => setTicket(res));
-      } catch {
-        (err) => console.log(err);
-      }
+      readTicket(renderCondition)
+        .then((res) => {
+          if (!res) {
+            throw new Error("ERROR in readTicket: no such document!");
+          }
+          setTicket(res);
+        })
+        .catch((err) => {
+          console.log("ERROR in readTicket: loading failed.", err);
+          setTicket(null);
+          setLoading(false);
+        });
     }
+    return () => {
+      toast.remove();
+    };
   }, []);
 
   const userData = useSelector((state) => state.user);
@@ -136,7 +144,7 @@ export default function TicketItemForm({ renderCondition }) {
     );
   }
 
-  if (renderCondition != "new" && loading == false) {
+  if (renderCondition != "new" && ticket && loading == false) {
     formRender = (
       <>
         <TicketItemFormTitle
@@ -186,6 +194,13 @@ export default function TicketItemForm({ renderCondition }) {
     );
   }
 
+  if (
+    !renderCondition ||
+    (renderCondition != "new" && !ticket && loading == false)
+  ) {
+    return <Navigate to={"/tickets"} />;
+  }
+
   return (
     <DivCont>
       <Notify />
@@ -199,7 +214,7 @@ export default function TicketItemForm({ renderCondition }) {
         <Label>
           {renderCondition == "new"
             ? "New task"
-            : ticket.isOpen
+            : ticket?.isOpen
             ? "Editing"
             : "Ticket closed"}
         </Label>

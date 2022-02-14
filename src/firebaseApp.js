@@ -42,11 +42,12 @@ export async function readTicket(id) {
   // const ticket = await getDocs(queryTicket);
   // return ticket.docs[0].data();
   //const docRef = doc(collection(db, "tickets"));
+  
   try {
     const docSnap = await getDoc(doc(collection(db, "tickets"), id));
     return docSnap.data();
-  } catch {
-    console.log("ERROR in readTicket: no such document!");
+  } catch (err) {
+    return err;
   }
 }
 
