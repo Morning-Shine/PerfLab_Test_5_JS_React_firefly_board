@@ -19,15 +19,15 @@ import styled from "@emotion/styled";
 export default function TicketItemForm({ renderCondition }) {
   const [loading, setLoading] = useState(true);
   const [ticket, setTicket] = useState({});
-
+ 
   useEffect(() => {
     if (ticket?.title && loading == true) {
       setLoading(false);
     }
-  });
+  }, [ticket, loading]);
 
   useEffect(() => {
-    if (renderCondition != "new") {
+    if (renderCondition !== "new") {
       readTicket(renderCondition)
         .then((res) => {
           if (!res) {
@@ -102,7 +102,7 @@ export default function TicketItemForm({ renderCondition }) {
   };
 
   let formRender;
-  if (renderCondition == "new") {
+  if (renderCondition === "new") {
     formRender = (
       <>
         <TicketItemFormTitle
@@ -136,7 +136,7 @@ export default function TicketItemForm({ renderCondition }) {
     );
   }
 
-  if (renderCondition != "new" && loading == true) {
+  if (renderCondition !== "new" && loading === true) {
     formRender = (
       <DivLoader>
         <Loader />
@@ -144,7 +144,7 @@ export default function TicketItemForm({ renderCondition }) {
     );
   }
 
-  if (renderCondition != "new" && ticket && loading == false) {
+  if (renderCondition !== "new" && ticket && loading === false) {
     formRender = (
       <>
         <TicketItemFormTitle
@@ -196,7 +196,7 @@ export default function TicketItemForm({ renderCondition }) {
 
   if (
     !renderCondition ||
-    (renderCondition != "new" && !ticket && loading == false)
+    (renderCondition !== "new" && !ticket && loading === false)
   ) {
     return <Navigate to={"/tickets"} />;
   }
@@ -206,13 +206,13 @@ export default function TicketItemForm({ renderCondition }) {
       <Notify />
       <Form
         onSubmit={
-          renderCondition == "new"
+          renderCondition === "new"
             ? handleSubmit(onSubmitSave)
             : handleSubmit(onSubmitupdate)
         }
       >
         <Label>
-          {renderCondition == "new"
+          {renderCondition === "new"
             ? "New task"
             : ticket?.isOpen
             ? "Editing"
