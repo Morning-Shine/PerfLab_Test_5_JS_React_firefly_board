@@ -2,6 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import { ResponsiveBar } from "@nivo/bar";
+import Box from "@mui/material/Box";
+
 
 const testData = [
   {
@@ -109,7 +111,7 @@ const barTheme = {
 
 export default function DashboardBarChart() {
   return (
-    <Div>
+    <StyledBox sx={{ bgcolor: "background.default" }}>
       <P>Completed Trends</P>
       <StyledTypography variant="subtitle1">
         указать дату и время обновления
@@ -148,16 +150,18 @@ export default function DashboardBarChart() {
           },
         ]}
       />
-    </Div>
+    </StyledBox>
   );
 }
 
-const Div = styled.div`
-  max-height: calc(100vh - 420px);
-  min-height: calc(100vh - 600px);
+const StyledBox = styled(Box)`
+  border: 1px solid #dfe0eb;
+  border-radius: 8px;
+  max-height: calc(100vh - 480px);
+  min-height: calc(100vh - 540px);
   height: 55vh;
   max-width: calc(100vw - 318px);
-  margin: 0px 30px 0 33px;
+  margin: 30px 30px 30px 33px;
   @media (max-width: 1280px) {
     //TODO сделать уменьшаемый сайд бар
     max-width: calc(100vw - 139px);

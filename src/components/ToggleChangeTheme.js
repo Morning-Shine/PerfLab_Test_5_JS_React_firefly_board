@@ -47,7 +47,6 @@ export default function ToggleChangeTheme() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "background.default",
         color: "text.primary",
         borderRadius: 1,
       }}

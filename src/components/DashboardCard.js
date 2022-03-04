@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 export default function DashboardCard({ name, amount, percent }) {
   return (
-    <StyledCard>
+    <StyledCard sx={{ bgcolor: "background.default" }}>
       <Typography sx={{ fontSize: 19 }} color="text.secondary" gutterBottom>
         {name}
       </Typography>
@@ -25,8 +25,8 @@ export default function DashboardCard({ name, amount, percent }) {
 
 const StyledCard = styled(Card)`
   border: 1px solid #dfe0eb;
-  box-shadow: none;
   border-radius: 8px;
+  box-shadow: none;
   height: 100%;
   width: 23%;
   text-align: center;

@@ -3,23 +3,25 @@ import styled from "@emotion/styled";
 import NewTicketBtn from "./NewTicketBtn";
 import TableWrapper from "./TableWrapper";
 import TableView from "./TableView";
+import Box from "@mui/material/Box";
+
 
 export default function TicketsTable() {
   const [view, setView] = useState("list"); //tile
 
   return (
-    <DivCont>
+    <StyledBox sx={{ bgcolor: "background.default" }}>
       <DivTitle>
         <P>All tickets</P>
         <NewTicketBtn />
         <TableView />
       </DivTitle>
       <TableWrapper />
-    </DivCont>
+    </StyledBox>
   );
 }
 
-const DivCont = styled.div`
+const StyledBox = styled(Box)`
   border: 1px solid #dfe0eb;
   box-sizing: border-box;
   border-radius: 8px;

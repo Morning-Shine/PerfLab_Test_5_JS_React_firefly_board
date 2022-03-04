@@ -11,15 +11,17 @@ import { lightMode } from "./assets/uiThemes/lightMode";
 import { darkMode } from "./assets/uiThemes/darkMode";
 
 function App() {
-  const themeProp = useSelector(state => state.theme.currentTheme);
+  const themeProp = useSelector((state) => state.theme.currentTheme);
 
   let theme;
   switch (themeProp) {
     case "dark":
       theme = darkMode;
+      console.log("darkMode", darkMode);
       break;
     case "light":
       theme = lightMode;
+      console.log("lightMode", lightMode);
       break;
   }
 
@@ -28,8 +30,7 @@ function App() {
 
   let render;
   loading
-    ? 
-      (render = (
+    ? (render = (
         <div className="AppLoader">
           <Loader />
         </div>

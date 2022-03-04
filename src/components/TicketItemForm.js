@@ -12,6 +12,8 @@ import TicketItemFormDescription from "./TicketItemFormDescription";
 import TicketItemFormBtn1 from "./TicketItemFormBtn1";
 import TicketItemFormBtn2 from "./TicketItemFormBtn2";
 import TicketItemFormBtn3 from "./TicketItemFormBtn3";
+import Box from "@mui/material/Box";
+
 import { drawerWidth } from "./SideBar";
 import toast from "react-hot-toast";
 import styled from "@emotion/styled";
@@ -19,7 +21,7 @@ import styled from "@emotion/styled";
 export default function TicketItemForm({ renderCondition }) {
   const [loading, setLoading] = useState(true);
   const [ticket, setTicket] = useState({});
- 
+
   useEffect(() => {
     if (ticket?.title && loading == true) {
       setLoading(false);
@@ -202,7 +204,7 @@ export default function TicketItemForm({ renderCondition }) {
   }
 
   return (
-    <DivCont>
+    <StyledBox sx={{ bgcolor: "background.default" }}>
       <Notify />
       <Form
         onSubmit={
@@ -220,11 +222,12 @@ export default function TicketItemForm({ renderCondition }) {
         </Label>
         {formRender}
       </Form>
-    </DivCont>
+    </StyledBox>
   );
 }
 
-const DivCont = styled.div`
+const StyledBox = styled(Box)`
+  border-radius: 8px;
   position: absolute;
   width: 1122px;
   top: 128px;
