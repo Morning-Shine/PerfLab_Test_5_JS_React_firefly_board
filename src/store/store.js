@@ -18,7 +18,6 @@ import userSlice from "./userSlice";
 import firebaseDataLoadingSlice from "./firebaseDataLoadingSlice";
 
 
-
 const persistConfig = {
   key: "root",
   storage,
@@ -37,7 +36,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

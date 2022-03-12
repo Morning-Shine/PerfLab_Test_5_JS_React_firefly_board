@@ -13,8 +13,6 @@ import TicketItemFormBtn1 from "./TicketItemFormBtn1";
 import TicketItemFormBtn2 from "./TicketItemFormBtn2";
 import TicketItemFormBtn3 from "./TicketItemFormBtn3";
 import Box from "@mui/material/Box";
-
-import { drawerWidth } from "./SideBar";
 import toast from "react-hot-toast";
 import styled from "@emotion/styled";
 

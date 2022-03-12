@@ -1,9 +1,11 @@
 import React from "react";
-import SideBar, { drawerWidth } from "../components/SideBar";
+import SideBar, {
+  drawerWidthWide,
+  drawerWidthNarrow,
+} from "../components/SideBar";
 import ControlPanel from "../components/ControlPanel";
 import styled from "@emotion/styled";
 import TicketItemForm from "../components/TicketItemForm";
-import { useParams } from "react-router-dom";
 
 
 export default function ScreenNewTask() {
@@ -12,7 +14,7 @@ export default function ScreenNewTask() {
       <SideBar />
       <Div>
         <ControlPanel />
-        <TicketItemForm renderCondition={"new"}/>
+        <TicketItemForm renderCondition={"new"} />
       </Div>
     </DivCont>
   );
@@ -21,7 +23,10 @@ export default function ScreenNewTask() {
 const DivCont = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-columns: ${drawerWidth}px auto;
+  grid-template-columns: ${drawerWidthWide}px auto;
+  @media (max-width: 1280px) {
+    grid-template-columns: ${drawerWidthNarrow}px auto;
+  }
 `;
 
 const Div = styled.div`

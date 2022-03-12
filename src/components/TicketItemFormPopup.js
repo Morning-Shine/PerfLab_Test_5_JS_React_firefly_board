@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { drawerWidth } from "./SideBar";
+import { drawerWidthWide, drawerWidthNarrow } from "./SideBar";
 import { Button } from "@mui/material";
+
 
 export default function TicketItemFormPopup({
   visible,
@@ -24,14 +25,18 @@ export default function TicketItemFormPopup({
     </DivCont>
   ) : null;
 }
+
 const DivCont = styled.div`
   position: fixed;
   top: 0;
-  left: ${drawerWidth}px;
   width: 100vw;
   height: 100vh;
   background: rgba(0.5, 0.5, 0.5, 0.4);
   display: flex;
+  left: ${drawerWidthWide}px;
+  @media (max-width: 1280px) {
+    left: ${drawerWidthNarrow}px;
+  }
 `;
 
 const Popup = styled.div`

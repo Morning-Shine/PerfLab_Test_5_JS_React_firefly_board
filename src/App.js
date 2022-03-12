@@ -17,11 +17,9 @@ function App() {
   switch (themeProp) {
     case "dark":
       theme = darkMode;
-      console.log("darkMode", darkMode);
       break;
     case "light":
       theme = lightMode;
-      console.log("lightMode", lightMode);
       break;
   }
 

@@ -11,7 +11,6 @@ import ScreenTickets from "./ScreenTickets";
 import ScreenTask from "./ScreenTask";
 import ScreenNewTask from "./ScreenNewTask";
 
-// import Login from "../components/Login";
 
 export const publicRoutes = [
   {

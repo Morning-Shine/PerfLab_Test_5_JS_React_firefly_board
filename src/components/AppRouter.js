@@ -5,14 +5,16 @@ import { DASHBOARD, TICKETS, LOGIN_ROUTE } from "../utils/constants";
 import { useSelector } from "react-redux";
 
 
-
 export default function AppRouter() {
-  const user = useSelector(state => state.user.id);
-  // console.log(user);
+  const user = useSelector((state) => state.user.id);
   return user ? (
     <Routes>
       {privateRoutes.map(({ path, element }) => (
-        <Route path={path} element={element} key={path} />
+        <Route
+          path={path}
+          element={element}
+          key={path}
+        />
       ))}
       {/* <Route path="*" element={<Navigate to={TICKETS} />} /> */}
       <Route path="*" element={<Navigate to={DASHBOARD} />} />
